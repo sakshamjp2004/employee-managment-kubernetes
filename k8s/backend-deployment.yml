@@ -1,0 +1,42 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: backend
+  namespace: prod-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-pod
+  template:
+    metadata:
+      labels:
+        app: back-pod
+    spec:
+      containers:
+        - name: back-ct
+          image: shamrock2004/employees-backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: emp-configmap
+                  key: SPRING.DATASOURCE.URL
+
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: emp-secret
+                  key: SPRING.DATASOURCE.USERNAME
+            
+            - name:  SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name:  emp-secret
+                  key:  SPRING.DATASOURCE.PASSWORD
+
+
+  
+

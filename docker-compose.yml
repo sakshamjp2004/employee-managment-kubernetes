@@ -1,0 +1,49 @@
+name: employees
+
+services:
+  frontend:
+    build:
+      context: react-hooks-frontend/.
+    ports:
+      - 80:80
+    container_name: react
+    restart: always
+    networks:
+      - saksham
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: springboot-backend/.
+    ports:
+      - 8080:8080
+    container_name: springboot
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ems?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Mysql@123
+    restart: always
+    depends_on:
+      - mysql
+    networks:
+      - saksham
+
+  mysql:
+    image: mysql:8.0.33
+    ports:
+      - 3306:3306
+    container_name: mysql_cont
+    environment:
+      MYSQL_ROOT_PASSWORD: Mysql@123
+      MYSQL_DATABASE: ems
+    restart: always
+    networks:
+      - saksham
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
+networks:
+  saksham:

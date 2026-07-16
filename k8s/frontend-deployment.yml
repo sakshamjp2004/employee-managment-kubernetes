@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: frontend
+  namespace: prod-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front-pod
+  template:
+    metadata:
+      labels:
+        app: front-pod
+    spec:
+      containers:
+        - name: front-ct
+          image: shamrock2004/employees-frontend:latest
+          ports:
+            - containerPort: 80
+
+  
+

@@ -1,0 +1,7 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: emp-configmap
+  namespace: prod-app
+data:
+  SPRING.DATASOURCE.URL: jdbc:mysql://mysql-svc:3306/ems?useSSL=false&allowPublicKeyRetrieval=true

@@ -1,0 +1,41 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: mysql-dp
+  namespace: prod-app
+spec:
+  serviceName: mysql-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-pod
+  template:
+    metadata:
+      labels:
+        app: mysql-pod
+    spec:
+      containers:
+        - name: mysql-ct
+          image: mysql:8.0.33
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: emp-secret
+                  key: MYSQL_ROOT_PASSWORD 
+            - name: MYSQL_DATABASE
+              value: ems
+          volumeMounts:
+            - name: mysql-vl
+              mountPath: /var/lib/mysql/
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-vl
+      spec:
+        accessModes: [ "ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+
