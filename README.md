@@ -1,8 +1,24 @@
 # Employee Management System - DevOps Deployment
 
-A full-stack Employee Management System deployed using modern DevOps tools and practices.
+A full-stack Employee Management System deployed using Docker, Kubernetes, Nginx, and AWS EC2.
 
-This project focuses on containerization, orchestration, and cloud deployment rather than application development. The application itself is based on an open-source React + Spring Boot project, while the Docker, Kubernetes, Nginx, and AWS deployment work was implemented as part of my DevOps learning journey.
+This repository showcases my hands-on experience with containerization, orchestration, and cloud deployment. While the application is based on an open-source React + Spring Boot project, the complete deployment pipeline—including Docker, Docker Compose, Kubernetes, Nginx, and AWS EC2—was implemented by me as part of my DevOps learning journey.
+
+---
+
+## Project Preview
+
+### Home Page
+
+![Home Page](images/home-page.png)
+
+### Employee List
+
+![Employee List](images/employee-list.png)
+
+### Add Employee
+
+![Create Employee](images/create-employee.png)
 
 ---
 
@@ -19,65 +35,80 @@ This project focuses on containerization, orchestration, and cloud deployment ra
 
 ---
 
-## What I Implemented
+## Features
 
-- Containerized React using a multi-stage Docker build
-- Containerized Spring Boot application using multi-stage docker build
-- Configured MySQL inside Docker
-- Connected all containers using Docker Compose
-- Configured Nginx as a reverse proxy
-- Deployed the application on AWS EC2
-- Migrated the application from Docker Compose to Kubernetes
-- Created Kubernetes Deployments
-- Created Services for inter-pod communication
-- Used ConfigMaps and Secrets for configuration
-- Configured Persistent Volumes for MySQL
-- Exposed the application using Kubernetes Ingress
+- Employee CRUD Operations
+- Multi-stage Docker builds
+- Docker Compose deployment
+- Nginx Reverse Proxy
+- Kubernetes Deployments
+- Kubernetes Services
+- ConfigMaps & Secrets
+- Persistent Volume Claim (PVC)
+- Kubernetes Ingress
+- AWS EC2 Deployment
+
+---
+
+## Kubernetes Deployment
+
+### Cluster Resources
+
+![Kubernetes Resources](images/configurations.png)
+
+### Ingress & Persistent Volume Claim
+
+![Ingress & PVC](images/ingress-pvc.png)
 
 ---
 
 ## Architecture
 
-Docker Compose
+### Docker Compose
 
+```text
 Browser
-↓
+   │
 Nginx
-↓
+   │
 React
-↓
+   │
 Spring Boot
-↓
+   │
 MySQL
+```
 
-Kubernetes
+### Kubernetes
 
+```text
 Browser
-↓
+   │
 Ingress
-↓
+   │
 Frontend Service
-↓
-Frontend Pod
-↓
+   │
+Frontend Pod (React + Nginx)
+   │
 Backend Service
-↓
-Backend Pod
-↓
+   │
+Backend Pod (Spring Boot)
+   │
 MySQL Service
-↓
+   │
 MySQL Pod
+```
 
 ---
 
 ## Repository Structure
 
-```
+```text
 .
 ├── docker-compose.yml
-├── react-hooks-frontend
-├── springboot-backend
-├── k8s
+├── react-hooks-frontend/
+├── springboot-backend/
+├── k8s/
+├── images/
 └── README.md
 ```
 
@@ -92,14 +123,25 @@ MySQL Pod
 - AWS EC2
 - Linux
 - Container Networking
-- Persistent Storage
-- Reverse Proxy
-- Configuration Management
+- ConfigMaps
+- Secrets
+- Persistent Volumes
+- Ingress
+- Reverse Proxy Configuration
+
+---
+
+## Future Improvements
+
+- Helm Charts
+- Jenkins CI/CD Pipeline
+- Terraform Infrastructure as Code
+- Prometheus & Grafana Monitoring
 
 ---
 
 ## Credits
 
-The application source code is based on the open-source Employee Management System created by Java Guides.
+The application source code is based on the open-source Employee Management System by Java Guides.
 
-The DevOps implementation, including Docker, Docker Compose, Kubernetes manifests, Nginx configuration, and AWS deployment, was completed as part of my learning and hands-on practice.
+The Docker, Docker Compose, Kubernetes manifests, Nginx configuration, and AWS EC2 deployment were implemented by me as part of my DevOps learning journey.
